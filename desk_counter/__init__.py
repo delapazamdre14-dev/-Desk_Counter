@@ -1,0 +1,1 @@
+from desk_counter.core.pipeline import count_objects
