@@ -1,9 +1,5 @@
 import numpy as np
 
-
-# =========================
-# THRESHOLD BASE (REUTILIZABLE)
-# =========================
 def threshold_binary(image, thresh, invert=False):
     binary = np.zeros_like(image)
 
@@ -14,17 +10,9 @@ def threshold_binary(image, thresh, invert=False):
 
     return binary
 
-
-# =========================
-# THRESHOLD FIJO
-# =========================
 def threshold(image, thresh=127, invert=False):
     return threshold_binary(image, thresh, invert)
 
-
-# =========================
-# OTSU (CÁLCULO DEL UMBRAL)
-# =========================
 def compute_otsu_threshold(image):
     img = image.astype(np.uint8)
 
@@ -65,10 +53,6 @@ def compute_otsu_threshold(image):
 
     return best_thresh
 
-
-# =========================
-# OTSU COMPLETO
-# =========================
 def threshold_otsu(image, invert=False):
     thresh = compute_otsu_threshold(image)
     return threshold_binary(image, thresh, invert)
