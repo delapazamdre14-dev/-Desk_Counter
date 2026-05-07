@@ -1,8 +1,6 @@
 import numpy as np
 
-# =========================
-# NORMALIZACIÓN
-# =========================
+
 def normalize(image):
     return image.astype(np.float32) / 255.0
 
@@ -10,9 +8,7 @@ def denormalize(image):
     image = image / np.max(image) if np.max(image) != 0 else image
     return np.uint8(image * 255)
 
-# =========================
-# TRANSFORMACIONES
-# =========================
+
 def log_transform(image, c=1):
     img = normalize(image)
     result = c * np.log(1 + img)
@@ -26,9 +22,7 @@ def gamma_transform(image, gamma=1.0, c=1):
 def invert(image):
     return 255 - image
 
-# =========================
-# FILTROS (LO IMPORTANTE)
-# =========================
+
 def gaussian_kernel(size=5, sigma=1):
     ax = np.linspace(-(size // 2), size // 2, size)
     xx, yy = np.meshgrid(ax, ax)
@@ -56,11 +50,11 @@ def apply_convolution(image, kernel, keep_float=False):
             output[i, j] = np.sum(region * kernel)
 
     if keep_float:
-        return output  # 🔥 SIN convertir
+        return output 
     else:
-        return np.uint8(np.clip(output, 0, 255))  # más seguro
+        return np.uint8(np.clip(output, 0, 255))  
 
-# 👇 ESTA ES LA QUE USA EL PIPELINE
+
 def gaussian_filter(image, size=5, sigma=1):
     kernel = gaussian_kernel(size, sigma)
     return apply_convolution(image, kernel)
