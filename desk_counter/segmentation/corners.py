@@ -5,7 +5,7 @@ from desk_counter.preprocessing.filters import apply_convolution
 def harris_corners(image, k=0.04, threshold=0.01):
     img = image.astype(np.float32)
 
-    # Sobel (gradientes)
+    
     Kx = np.array([
         [-1, 0, 1],
         [-2, 0, 2],
@@ -21,28 +21,28 @@ def harris_corners(image, k=0.04, threshold=0.01):
     Ix = apply_convolution(img, Kx, keep_float=True)
     Iy = apply_convolution(img, Ky, keep_float=True)
 
-    # Productos
+   
     Ixx = Ix * Ix
     Iyy = Iy * Iy
     Ixy = Ix * Iy
 
-    # Suavizado (ventana)
+    
     kernel = np.ones((3, 3)) / 9.0
 
     Sxx = apply_convolution(Ixx, kernel, keep_float=True)
     Syy = apply_convolution(Iyy, kernel, keep_float=True)
     Sxy = apply_convolution(Ixy, kernel, keep_float=True)
 
-    # Respuesta de Harris
+    
     det = (Sxx * Syy) - (Sxy ** 2)
     trace = Sxx + Syy
 
     R = det - k * (trace ** 2)
 
-    # Normalizar
+    
     R = R / np.max(R) if np.max(R) != 0 else R
 
-    # Umbral
+    
     corners = np.zeros_like(R)
     corners[R > threshold] = 255
 
