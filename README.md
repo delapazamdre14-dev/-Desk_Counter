@@ -49,4 +49,4 @@ from desk_counter.preprocessing.filters import gaussian_filter
 ## 📦 Instalación
 
 ```bash
-https://github.com/delapazamdre14-dev/-Desk_Counter.git
+pip install git+https://github.com/delapazamdre14-dev/-Desk_Counter.git
