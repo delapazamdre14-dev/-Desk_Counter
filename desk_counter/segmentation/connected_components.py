@@ -23,7 +23,7 @@ def connected_components(binary):
 
             labels[cx, cy] = label
 
-            # vecinos (4-conectividad)
+           
             stack.append((cx+1, cy))
             stack.append((cx-1, cy))
             stack.append((cx, cy+1))
